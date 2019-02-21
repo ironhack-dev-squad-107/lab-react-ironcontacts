@@ -9,10 +9,17 @@ class Table extends Component {
   }
 
   add() {
+    // we start with the current state
+
     const startState = this.state.contacts;
+
+    // we push a random item from out contact list (the one we imported), to our state
     startState.push(
       contactsArr[Math.floor(Math.random() * contactsArr.length)]
     );
+
+    //set state causes the page to rerender
+
     this.setState({ contacts: startState });
   }
 
@@ -56,11 +63,14 @@ class Table extends Component {
           </thead>
 
           <tbody>
+            {/* We're mapping over the state and passing the data down to TableRow.js */}
+            {/* We created a new file to help keep our code organised  */}
             {contacts.map(oneItem => {
               return (
                 <TableRow
                   key={oneItem.name}
                   allContent={oneItem}
+                  // we pass oneItem into the delete function because we want to delete an entire row. oneItem contains all of the info
                   deleteOnClick={() => this.delete(oneItem)}
                 />
               );
